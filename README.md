@@ -123,3 +123,7 @@ Here's the output when useNew is set to true, demonstrating the fix:
  LOG  Connection Failed - error false for url:https://jsonplaceholder.typicode.com/todos/1
  ERROR  Calling updateUser from AnotherWorldApp.componentDidMount useNew: true error: false
 ```
+
+# Thanks
+
+to jsonplaceholder.typicode.com for making their public demo API available!
