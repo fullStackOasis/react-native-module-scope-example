@@ -127,3 +127,7 @@ Here's the output when useNew is set to true, demonstrating the fix:
 # Thanks
 
 to jsonplaceholder.typicode.com for making their public demo API available!
+
+### bookmark
+
+~/Projects/ReactNativeProjects/TestScope
