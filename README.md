@@ -2,7 +2,7 @@
 
 Example of problem code that can result in bugs.
 
-`ConnectService` has a module-level `retryCount` variable that might be set over and over again, depending on how `updateUser` and ``updateUser2` are called. This causes a bug with the retry mechanism.
+`ConnectService` has a module-level `retryCount` variable that might be set over and over again, depending on how `updateUser` and `updateUser2` are called. This causes a bug with the retry mechanism.
 
 `NewConnectService` does not use a module-level variable. Instead, there's a variable that's set within `fetchData`, passed into the `fetchRetry` method which acts as a closure, and from there the `retryCount` variable is scoped to the `Promise`. So it increments its own `retryCount` variable and doesn't touch anything else.
 
@@ -20,7 +20,7 @@ npx react-native run-android
 
 This assumes you know what you're doing (have USB debugging set up).
 
-At this point, you can turn off wifi and check the output of metro server to see how `componentDidMount` in the two separate components, `HelloWorldApp` and `AnotherWorldApp`, the wrong number of times - only 6 times total, when you expect it to be called 6 times for each component.
+Two separate components, `HelloWorldApp` and `AnotherWorldApp`, attempt to contact a REST API in two separate ways in their `componentDidMount` methods. You can turn off wifi and check the output of metro server to see how this results in the wrong number of retries - only 6 times total, when you expect it to be called 6 times for *each component*.
 
 `HelloWorldApp` calls `ConnectService.updateUser2` and `AnotherWorldApp` calls `ConnectService.updateUser`. The code expects that each method should get retried 6 times, but in fact each method gets retried only 3 times. This is the bug.
 
